@@ -24,7 +24,7 @@ public class VerificationTokenService {
 		verificationTokenRepository.save(verificationToken);
 	}
 
-	public VerificationToken getVerifivationToken(String token) {
+	public VerificationToken getVerificationToken(String token) {
 		return verificationTokenRepository.findByToken(token);
 	}
 }
