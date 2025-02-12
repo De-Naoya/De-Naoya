@@ -23,7 +23,7 @@ import com.example.moattravel_3.repository.HouseRepository;
 import com.example.moattravel_3.service.HouseService;
 
 @Controller
-@RequestMapping("admin/houses")
+@RequestMapping("/admin/houses")
 public class AdminHouseController {
 	private final HouseRepository houseRepository;
 	private final HouseService houseService;
@@ -37,14 +37,14 @@ public class AdminHouseController {
 	public String index(Model model,
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			@RequestParam(name = "keyword", required = false) String keyword) {
-		Page<House> housePage = houseRepository.findAll(pageable);
+		Page<House> housePage;
 		if (keyword != null && !keyword.isEmpty()) {
 			housePage = houseRepository.findByNameLike("%" + keyword + "%", pageable);
 		} else {
 			housePage = houseRepository.findAll(pageable);
 		}
-		model.addAttribute("keyword", keyword);
 		model.addAttribute("housePage", housePage);
+		model.addAttribute("keyword", keyword);
 		return "admin/houses/index";
 
 	}
