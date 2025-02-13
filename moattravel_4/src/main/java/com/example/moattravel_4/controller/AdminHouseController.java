@@ -7,16 +7,19 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.moattravel_4.entity.House;
+import com.example.moattravel_4.form.HouseRegisterForm;
 import com.example.moattravel_4.repository.HouseRepository;
 
 @Controller
 @RequestMapping("/admin/houses")
 public class AdminHouseController {
 	private final HouseRepository houseRepository;
+	
 
 	public AdminHouseController(HouseRepository houseRepository) {
 		this.houseRepository = houseRepository;
@@ -38,6 +41,19 @@ public class AdminHouseController {
 		model.addAttribute("housePage", housePage);
 		model.addAttribute("keyword", keyword);
 		return "admin/houses/index";
+	}
+
+	@GetMapping("/{id}")
+	public String show(@PathVariable(name = "id") Integer id, Model model) {
+		House house = houseRepository.getReferenceById(id);
+		model.addAttribute("house", house);
+		return "admin/houses/show";
+	}
+
+	@GetMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("houseRegisterForm", new HouseRegisterForm());
+		return "admin/houses/register";
 	}
 
 }
