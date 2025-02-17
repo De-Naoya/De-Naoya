@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.moattravel_4.entity.House;
+import com.example.moattravel_4.form.HouseEditForm;
 import com.example.moattravel_4.form.HouseRegisterForm;
 import com.example.moattravel_4.repository.HouseRepository;
 
@@ -41,6 +42,19 @@ public class HouseService {
 		house.setAddress(houseRegisterForm.getAddress());
 		house.setPhoneNumber(houseRegisterForm.getPhoneNumber());
 		houseRepository.save(house);
+	}
+	
+	@Transactional
+	public void update(HouseEditForm houseEditForm) {
+		House house = houseRepository.getReferenceById(houseEditForm.getId());
+		MultipartFile imageFile = houseEditForm.getImageFile();
+		if(!imageFile.isEmpty()) {
+			String imageName = imageFile.getOriginalFilename();
+			String hashedImageName = imageFile.getOriginalFilename();
+			Path filePath = Paths.get("src/main/resorces/static/storage/" + hashedImageName
+					);
+			
+		}
 	}
 
 	//UUIDでファイル名を返す
