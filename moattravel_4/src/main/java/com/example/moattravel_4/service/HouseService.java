@@ -43,18 +43,26 @@ public class HouseService {
 		house.setPhoneNumber(houseRegisterForm.getPhoneNumber());
 		houseRepository.save(house);
 	}
-	
+
 	@Transactional
 	public void update(HouseEditForm houseEditForm) {
 		House house = houseRepository.getReferenceById(houseEditForm.getId());
 		MultipartFile imageFile = houseEditForm.getImageFile();
-		if(!imageFile.isEmpty()) {
+		if (!imageFile.isEmpty()) {
 			String imageName = imageFile.getOriginalFilename();
 			String hashedImageName = imageFile.getOriginalFilename();
-			Path filePath = Paths.get("src/main/resorces/static/storage/" + hashedImageName
-					);
-			
+			Path filePath = Paths.get("src/main/resorces/static/storage/" + hashedImageName);
+			copyImageFile(imageFile, filePath);
+			house.setImageName(hashedImageName);
 		}
+		house.setName(houseEditForm.getName());
+		house.setDescription(houseEditForm.getDescription());
+		house.setPrice(houseEditForm.getPrice());
+		house.setCapacity(houseEditForm.getCapacity());
+		house.setPostalCode(houseEditForm.getPostalCode());
+		house.setAddress(houseEditForm.getAddress());
+		house.setPhoneNumber(houseEditForm.getPhoneNumber());
+		houseRepository.save(house);
 	}
 
 	//UUIDでファイル名を返す

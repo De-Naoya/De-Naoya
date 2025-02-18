@@ -15,14 +15,14 @@
 			<div class="container pt-4 pb-5 moattravel-container">
 				<div class="row justify-content-center">
 					<div class="col-xl-5 col-lg-6 col-md-8">
-						<nav class="mb-4" styles="--bs-breadcrumb-diveder: '>';" aria-label="breadcrumb">
+						<nav class="mb-4" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0">
-								<li class="breadcrumb mb-0"><a th:href="@{/admin/houses}">民宿一覧</a></li>
+								<li class="breadcrumb-item"><a th:href="@{/admin/houses}">民宿一覧</a></li>
 								<li class="breadcrumb-item active" aria-current="page">民宿情報収集</li>
 							</ol>
 						</nav>
 						<h1 class="mb-4 text-center">民宿情報編集</h1>
-						<form method="post" th:acion="@{/admin/houses/__${houseEditForm.getId()}__/update}"
+						<form method="post" th:action="@{/admin/houses/__${houseEditForm.getId()}__/update}"
 							th:object="${houseEditForm}" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{id}">
 							<div class="form-group row mb-3">
@@ -54,7 +54,7 @@
 									<label for="description" class="col-form-label text-md-left fw-bold">説明</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${fields.hasErrors('descriotion')}" class="text-danger small mb-2"
+									<div th:if="${#fields.hasErrors('description')}" class="text-danger small mb-2"
 										th:errors="*{description}"></div>
 									<textarea class="form-control" th:field="*{description}" cols="30"
 										rows="5"></textarea>
@@ -65,7 +65,7 @@
 									<label for="price" class="col-form-label text-md-left fw-bold">宿泊料金（単位：円）</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${fields.hasErrors('price')}" class="text-danger small mb-2"
+									<div th:if="${#fields.hasErrors('price')}" class="text-danger small mb-2"
 										th:errors="*{price}"></div>
 									<input type="number" class="form-control" th:field="*{price}">
 								</div>
@@ -75,7 +75,7 @@
 									<label for="capacity" class="col-form-label text-md-left fw-bold">定員（単位：人）</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${fields.hasErrors('capacity')}" class="text-danger small mb-2"
+									<div th:if="${#fields.hasErrors('capacity')}" class="text-danger small mb-2"
 										th:errors="*{capacity}"></div>
 									<input type="number" class="form-control" th:field="*{capacity}">
 								</div>
@@ -85,7 +85,7 @@
 									<label for="postalCode" class="col-form-label text-md-left fw-bold">郵便番号</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${fields.hasErrors('postalCode')}" class="text-danger small mb-2"
+									<div th:if="${#fields.hasErrors('postalCode')}" class="text-danger small mb-2"
 										th:errors="*{postalCode}"></div>
 									<input type="text" class="form-control" th:field="*{postalCode}">
 								</div>
@@ -95,7 +95,7 @@
 									<label for="address" class="col-form-label text-md-left fw-bold">住所</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${fields.hasErrors('address')}" class="text-danger small mb-2"
+									<div th:if="${#fields.hasErrors('address')}" class="text-danger small mb-2"
 										th:errors="*{address}"></div>
 									<input type="text" class="form-control" th:field="*{address}">
 								</div>
@@ -105,7 +105,7 @@
 									<label for="phoneNumber" class="col-form-label text-md-left fw-bold">電話番号</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${fields.hasErrors('phoneNumber')}" class="text-danger small mb-2"
+									<div th:if="${#fields.hasErrors('phoneNumber')}" class="text-danger small mb-2"
 										th:errors="*{phoneNumber}"></div>
 									<input type="text" class="form-control" th:field="*{phoneNumber}">
 								</div>
@@ -120,7 +120,7 @@
 		</main>
 		<div th:replace="~{fragment :: footer}"></div>
 	</div>
-	<div th:replace="~{fragment :: footer}"></div>
+	<div th:replace="~{fragment :: scripts}"></div>
 	<script th:src="@{/js/preview.js}"></script>
 </body>
 
